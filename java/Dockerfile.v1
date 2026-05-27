@@ -1,0 +1,6 @@
+FROM tomcat:8.0.20-jre8
+MAINTAINER Navya_Sri 06/05/2026
+LABEL Java Deployment
+EXPOSE 8080
+COPY target/*.war /usr/local/tomcat/webapps/
+COPY tomcat-users.xml /usr/local/tomcat/conf/

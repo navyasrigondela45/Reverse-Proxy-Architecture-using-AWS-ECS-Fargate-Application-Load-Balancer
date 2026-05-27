@@ -1,0 +1,6 @@
+FROM httpd:2.4.66-alpine
+MAINTAINER Navya_Sri 06/05/2026
+LABEL httpd deployment
+EXPOSE 80
+WORKDIR /usr/local/apache2/htdocs/food/
+COPY food/ .

@@ -1,0 +1,7 @@
+FROM httpd
+MAINTAINER Navya_Sri 06/05/2026
+LABEL httpd deployment
+EXPOSE 80
+WORKDIR /usr/local/apache2/htdocs/
+COPY . .
+
