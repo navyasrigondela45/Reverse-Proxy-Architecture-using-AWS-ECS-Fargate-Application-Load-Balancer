@@ -126,3 +126,10 @@ Internet → Application Load Balancer → ECS Services → Containerized Applic
 
 * /food → HTTPD Container
 * /quiz → Tomcat Container
+
+* **awsvpc Networking Mode** → In ECS/Fargate, every container/task gets its own private IP address and network interface, just like a separate server. That’s why your ALB target groups had to use **IP type** instead of instance type.
+
+* **ECS Fargate Deployment** → You deployed containers on AWS without managing EC2 servers manually. AWS automatically handled the infrastructure, scaling, networking, and runtime while you focused only on containers and services.
+
+* **Cloud-Native Networking** → Your applications communicated using AWS-managed networking components like VPC, subnets, security groups, ALB, target groups, and ECS services instead of traditional on-premise server networking. This is modern cloud-based application architecture.
+
