@@ -1,23 +1,128 @@
-# reverse-proxy-in-progress
-reverse-proxy-in-progress
-ECS Cluster Overview
-<img width="959" height="434" alt="image" src="https://github.com/user-attachments/assets/6a7cd631-2509-458b-9ad6-8ecfd8182aa8" />
-ECS Services:
-- food
-  <img width="959" height="402" alt="image" src="https://github.com/user-attachments/assets/87c0b2f4-01d8-4b40-9480-80fb009bb7c8" />
-- quiz
-  <img width="959" height="401" alt="image" src="https://github.com/user-attachments/assets/b3439a64-9068-4755-b241-fddaca13ca88" />
-Load balancer page
-<img width="959" height="407" alt="image" src="https://github.com/user-attachments/assets/7e864ff4-a43b-46ee-a8b5-2b833fcd5010" />
-Listener
-- port
-  <img width="959" height="412" alt="image" src="https://github.com/user-attachments/assets/258be50c-321b-4bcd-acc6-b3c9da295b92" />
-- rules
-  <img width="959" height="434" alt="image" src="https://github.com/user-attachments/assets/6cb74123-50fd-4176-b6af-6ea4c407a3f3" />
-Target groups
-<img width="959" height="391" alt="image" src="https://github.com/user-attachments/assets/b2aef6ea-b139-4c6b-baab-7f89fa4a414a" />
-browser outputs:
-<img width="959" height="470" alt="image" src="https://github.com/user-attachments/assets/f09d85b8-66f9-4ab3-aea5-aba8000f6f6e" />
-<img width="959" height="472" alt="image" src="https://github.com/user-attachments/assets/6b8d8c02-66f7-4619-9ad9-4cf864fc8b1b" />
-Task definitions
-<img width="959" height="278" alt="image" src="https://github.com/user-attachments/assets/5e53e5eb-6b2b-4808-99e7-dec6a1d75d1f" />
+# Reverse Proxy Architecture using AWS ECS, Fargate & Application Load Balancer
+
+## Project Summary
+
+This project demonstrates a complete reverse proxy architecture deployed on AWS using ECS Fargate, Application Load Balancer (ALB), Docker containers, and path-based routing.
+
+Two containerized applications were deployed:
+
+* Food Service (Apache HTTPD)
+* Quiz Service (Tomcat Java Application)
+
+Both applications were containerized using Docker, pushed to container registry, and deployed as ECS services with multiple replicas. An AWS Application Load Balancer was configured to act as a reverse proxy and route traffic dynamically to the respective services using path-based routing.
+
+The project also involved troubleshooting ECS networking, target groups, awsvpc mode, IP-based target registration, ALB listener rules, and container routing behavior.
+
+---
+
+# Technologies Used
+
+* Docker
+* AWS ECS
+* AWS Fargate
+* AWS Application Load Balancer (ALB)
+* Target Groups
+* ECS Services
+* Apache HTTPD
+* Tomcat
+* Docker Hub
+* Path-Based Routing
+* Reverse Proxy Architecture
+* awsvpc Networking Mode
+
+---
+
+# Project Workflow
+
+## Step 1: Created Docker Images
+
+* Built HTTPD image for Food Service
+* Built Tomcat image for Quiz Service
+* Configured application paths for ALB routing
+
+## Step 2: Pushed Images to Docker Hub
+
+* Tagged Docker images
+* Pushed images to Docker registry
+
+## Step 3: Created ECS Cluster
+
+* Created ECS cluster using Fargate launch type
+* Configured networking and security groups
+
+## Step 4: Created ECS Task Definitions
+
+* Configured CPU and memory
+* Added container images and ports
+* Used awsvpc network mode
+
+## Step 5: Created ECS Services
+
+* Created Food Service
+* Created Quiz Service
+* Configured desired replica count
+
+## Step 6: Created Target Groups
+
+* Created IP-based target groups
+* Configured health checks
+* Attached ECS services
+
+## Step 7: Configured Application Load Balancer
+
+* Created ALB listener on port 80
+* Configured path-based routing:
+
+  * /food → Food Service
+  * /quiz → Quiz Service
+
+## Step 8: Verified Reverse Proxy Routing
+
+* Accessed both services using single ALB DNS
+* Verified healthy targets and successful routing
+
+---
+
+# Features Implemented
+
+* Reverse Proxy Architecture
+* Path-Based Routing
+* ECS Fargate Deployment
+* Docker Containerization
+* Load Balancing
+* High Availability using Replicas
+* Target Groups & Health Checks
+* DNS-Based Access
+* ECS Service Management
+* Cloud-Native Networking
+
+---
+
+# Access URLs
+
+* http://ALB-DNS/food
+* http://ALB-DNS/quiz
+
+---
+
+# Learning Outcomes
+
+Through this project, I learned:
+
+* ECS and Fargate deployment workflow
+* Application Load Balancer configuration
+* Reverse proxy implementation in AWS
+* Target groups and health checks
+* ECS networking concepts
+* Path-based traffic routing
+* Docker image management
+* Troubleshooting cloud deployments
+
+---
+
+# Architecture
+
+Internet → Application Load Balancer → ECS Services → Containerized Applications
+
+* /food → HTTPD Container
+* /quiz → Tomcat Container
